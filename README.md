@@ -14,4 +14,4 @@ Unlike normal Go, the dialect we're going to parse:
 * Has prefix forms of increment and decrement, `--x` and `++x` is valid
 * Left bitwise shift is right-associative (for the demonstration purposes)
 
-TODO: write an article about it.
+This repository has associated articles: [RU](https://habr.com/ru/post/494316/), EN (TODO).
