@@ -26,6 +26,11 @@ func TestParseGoodExpr(t *testing.T) {
 		{`x + y + z`, `(+ (+ x y) z)`},
 		{`x+y*z`, `(+ x (* y z))`},
 		{`x*y+z`, `(+ (* x y) z)`},
+		{`x >> y >> z`, `(>> (>> x y) z)`},
+		{`x == y`, `(== x y)`},
+		{`x + c1 == y + c2`, `(== (+ x c1) (+ y c2))`},
+		{`x || y && z`, `(|| x (&& y z))`},
+		{`x && y || z`, `(|| (&& x y) z)`},
 
 		// Tests for right-assoc binary expr.
 		{`x<<y`, `(<< x y)`},

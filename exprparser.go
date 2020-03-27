@@ -60,29 +60,36 @@ func newExprParser() *exprParser {
 	// Initialization of the parser tables.
 	addPrefixParselet(token.LPAREN, 0, p.parseParenExpr)
 	addPrefixParselet(token.IDENT, 0, p.parseNameExpr)
-	addInfixParselet(token.LPAREN, 8, p.parseCallExpr)
-	prefixExpr(6,
-		token.ADD,
-		token.SUB,
-		token.INC,
-		token.DEC,
-	)
-	postfixExpr(7,
-		token.INC,
-		token.DEC,
-	)
+	leftAssocBinaryExpr(1, token.LOR)  // ||
+	leftAssocBinaryExpr(2, token.LAND) // &&
 	leftAssocBinaryExpr(3,
-		token.ADD,
-		token.SUB,
+		token.EQL, // ==
+		token.NEQ, // !=
+	)
+	rightAssocBinaryExpr(4,
+		token.SHL, // <<
 	)
 	leftAssocBinaryExpr(4,
-		token.MUL,
-		token.QUO,
-		token.REM,
+		token.ADD, // +
+		token.SUB, // -
+		token.SHR, // >>
 	)
-	rightAssocBinaryExpr(3,
-		token.SHL,
+	leftAssocBinaryExpr(5,
+		token.MUL, // *
+		token.QUO, // /
+		token.REM, // %
 	)
+	prefixExpr(6,
+		token.ADD, // +
+		token.SUB, // -
+		token.INC, // ++
+		token.DEC, // --
+	)
+	postfixExpr(7,
+		token.INC, // ++
+		token.DEC, // --
+	)
+	addInfixParselet(token.LPAREN, 8, p.parseCallExpr)
 
 	return p
 }
